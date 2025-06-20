@@ -13,6 +13,14 @@ import greenSoundSrc from '../assets/sounds/green.wav';
 import yellowSoundSrc from '../assets/sounds/yellow.wav';
 import blueSoundSrc from '../assets/sounds/blue.wav';
 
+// Stable color list
+const colorList = [
+  { id: 'red', sound: new Audio(redSoundSrc) },
+  { id: 'green', sound: new Audio(greenSoundSrc) },
+  { id: 'yellow', sound: new Audio(yellowSoundSrc) },
+  { id: 'blue', sound: new Audio(blueSoundSrc) },
+];
+
 export default function GameScreen() {
   const difficultySettings = {
     easy: { initialLevel: 1, showDelay: 1000 },
@@ -32,6 +40,8 @@ export default function GameScreen() {
   const [gameState, setGameState] = useState('showing');
   const [soundEnabled] = useState(() => localStorage.getItem('soundEnabled') !== 'false');
 
+  const colors = useRef(colorList).current;
+
   const getMenuMusic = (theme) => {
     if (theme === 'pink') return menu2;
     if (theme === 'dark') return menu3;
@@ -39,17 +49,6 @@ export default function GameScreen() {
   };
 
   const menuAudio = useRef(new Audio(getMenuMusic(theme)));
-  const redSound = useRef(new Audio(redSoundSrc));
-  const greenSound = useRef(new Audio(greenSoundSrc));
-  const yellowSound = useRef(new Audio(yellowSoundSrc));
-  const blueSound = useRef(new Audio(blueSoundSrc));
-
-  const colors = [
-    { id: 'red', sound: redSound },
-    { id: 'green', sound: greenSound },
-    { id: 'yellow', sound: yellowSound },
-    { id: 'blue', sound: blueSound }
-  ];
 
   useEffect(() => {
     if (soundEnabled) {
@@ -72,7 +71,7 @@ export default function GameScreen() {
     setSequence(newSequence);
     setPlayerSequence([]);
     setGameState('showing');
-  }, [level]);
+  }, [level, colors]);
 
   useEffect(() => {
     generateSequence();
@@ -89,7 +88,7 @@ export default function GameScreen() {
           setActiveColor(currentColor);
 
           if (soundEnabled) {
-            const sound = colors.find(c => c.id === currentColor)?.sound?.current;
+            const sound = colors.find(c => c.id === currentColor)?.sound;
             sound.currentTime = 0;
             sound.play().catch((e) => console.warn(`Sound play error for ${currentColor}:`, e.message));
           }
@@ -106,14 +105,14 @@ export default function GameScreen() {
       }, currentSettings.showDelay);
       return () => clearInterval(interval);
     }
-  }, [gameState, sequence, soundEnabled, currentSettings.showDelay]);
+  }, [gameState, sequence, soundEnabled, colors, currentSettings.showDelay]);
 
   const handleColorClick = (colorId) => {
     if (gameState !== 'playing') return;
 
     setActiveColor(colorId);
     if (soundEnabled) {
-      const sound = colors.find(c => c.id === colorId)?.sound?.current;
+      const sound = colors.find(c => c.id === colorId)?.sound;
       sound?.play().catch((e) => console.warn(`Sound play error for ${colorId}:`, e.message));
     }
     setTimeout(() => setActiveColor(null), 300);
