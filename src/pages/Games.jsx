@@ -50,17 +50,33 @@ export default function GameScreen() {
 
   const menuAudio = useRef(new Audio(getMenuMusic(theme)));
 
+  // useEffect(() => {
+  //   if (soundEnabled) {
+  //     menuAudio.current.loop = true;
+  //     menuAudio.current.volume = 0.2;
+  //     menuAudio.current.play().catch((e) => console.warn('Menu sound play error:', e.message));
+  //   }
+  //   return () => {
+  //     menuAudio.current.pause();
+  //     menuAudio.current.currentTime = 0;
+  //   };
+  // }, [soundEnabled]);
+
   useEffect(() => {
+    const currentAudio = menuAudio.current;
+
     if (soundEnabled) {
-      menuAudio.current.loop = true;
-      menuAudio.current.volume = 0.2;
-      menuAudio.current.play().catch((e) => console.warn('Menu sound play error:', e.message));
+      currentAudio.loop = true;
+      currentAudio.volume = 0.2;
+      currentAudio.play().catch((e) => console.warn('Menu sound play error:', e.message));
     }
+
     return () => {
-      menuAudio.current.pause();
-      menuAudio.current.currentTime = 0;
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
     };
   }, [soundEnabled]);
+
 
   const generateSequence = useCallback(() => {
     const newSequence = [];
