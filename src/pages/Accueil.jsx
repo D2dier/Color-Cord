@@ -51,9 +51,9 @@ function Accueil() {
       <footer className="footer">
         <p>© 2025 Color Cord. Tous droits réservés.</p>
         <div className="social-links">
-          <a href="#"><FontAwesomeIcon icon={faFacebookF} /></a>
-          <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-          <a href="#"><FontAwesomeIcon icon={faInstagram} /></a>
+          <i><FontAwesomeIcon icon={faFacebookF} /></i>
+          <i><FontAwesomeIcon icon={faTwitter} /></i>
+          <i><FontAwesomeIcon icon={faInstagram} /></i>
         </div>
       </footer>
     </div>
