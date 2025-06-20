@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { RotateCcw, X } from 'lucide-react';
 import React from 'react';
 import Navbar from '../components/Navbar';
@@ -20,9 +20,9 @@ export default function GameScreen() {
     hard: { initialLevel: 3, showDelay: 600 },
   };
 
-  const storedDifficulty = localStorage.getItem('difficulty') || 'medium';
-  const storedTheme = localStorage.getItem('themeColor') || 'blue';
-  const currentSettings = difficultySettings[storedDifficulty];
+  const [difficulty] = useState(() => localStorage.getItem('difficulty') || 'medium');
+  const [theme] = useState(() => localStorage.getItem('themeColor') || 'blue');
+  const currentSettings = difficultySettings[difficulty];
 
   const [level, setLevel] = useState(currentSettings.initialLevel);
   const [score, setScore] = useState(0);
@@ -30,17 +30,15 @@ export default function GameScreen() {
   const [sequence, setSequence] = useState([]);
   const [playerSequence, setPlayerSequence] = useState([]);
   const [gameState, setGameState] = useState('showing');
-  const [soundEnabled, setSoundEnabled] = useState(localStorage.getItem('soundEnabled') !== 'false');
-  const [theme, setTheme] = useState(storedTheme);
+  const [soundEnabled] = useState(() => localStorage.getItem('soundEnabled') !== 'false');
 
-  // Dynamically assign menu music based on theme
   const getMenuMusic = (theme) => {
     if (theme === 'pink') return menu2;
     if (theme === 'dark') return menu3;
     return menu1;
   };
 
-  const menuAudio = useRef(new Audio(getMenuMusic(storedTheme)));
+  const menuAudio = useRef(new Audio(getMenuMusic(theme)));
   const redSound = useRef(new Audio(redSoundSrc));
   const greenSound = useRef(new Audio(greenSoundSrc));
   const yellowSound = useRef(new Audio(yellowSoundSrc));
@@ -54,7 +52,6 @@ export default function GameScreen() {
   ];
 
   useEffect(() => {
-    // Menu audio management
     if (soundEnabled) {
       menuAudio.current.loop = true;
       menuAudio.current.volume = 0.2;
@@ -66,14 +63,25 @@ export default function GameScreen() {
     };
   }, [soundEnabled]);
 
+  const generateSequence = useCallback(() => {
+    const newSequence = [];
+    for (let i = 0; i < level + 1; i++) {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)].id;
+      newSequence.push(randomColor);
+    }
+    setSequence(newSequence);
+    setPlayerSequence([]);
+    setGameState('showing');
+  }, [level]);
+
   useEffect(() => {
     generateSequence();
-  }, []);
+  }, [generateSequence]);
 
   useEffect(() => {
     if (gameState === 'showing' && sequence.length > 0) {
       let i = 0;
-      const highlightDuration = Math.min(currentSettings.showDelay * 0.6, 500); // 60% of delay or max 500ms
+      const highlightDuration = Math.min(currentSettings.showDelay * 0.6, 500);
 
       const interval = setInterval(() => {
         if (i < sequence.length) {
@@ -83,9 +91,7 @@ export default function GameScreen() {
           if (soundEnabled) {
             const sound = colors.find(c => c.id === currentColor)?.sound?.current;
             sound.currentTime = 0;
-            sound.play().catch((e) =>
-              console.warn(`Sound play error for ${currentColor}:`, e.message)
-            );
+            sound.play().catch((e) => console.warn(`Sound play error for ${currentColor}:`, e.message));
           }
 
           setTimeout(() => {
@@ -100,19 +106,7 @@ export default function GameScreen() {
       }, currentSettings.showDelay);
       return () => clearInterval(interval);
     }
-  }, [gameState, sequence]);
-
-
-  const generateSequence = () => {
-    const newSequence = [];
-    for (let i = 0; i < level + 1; i++) {
-      const randomColor = colors[Math.floor(Math.random() * colors.length)].id;
-      newSequence.push(randomColor);
-    }
-    setSequence(newSequence);
-    setPlayerSequence([]);
-    setGameState('showing');
-  };
+  }, [gameState, sequence, soundEnabled, currentSettings.showDelay]);
 
   const handleColorClick = (colorId) => {
     if (gameState !== 'playing') return;
@@ -133,16 +127,13 @@ export default function GameScreen() {
         date: new Date().toISOString(),
       };
 
-      // Retrieve previous results from localStorage
       const existingResults = JSON.parse(localStorage.getItem('gameResults')) || [];
-      const updatedResults = [newResult, ...existingResults].slice(0, 10); // keep latest 10
-
+      const updatedResults = [newResult, ...existingResults].slice(0, 10);
       localStorage.setItem('gameResults', JSON.stringify(updatedResults));
 
       setGameState('gameover');
       return;
     }
-
 
     if (newPlayerSequence.length === sequence.length) {
       setScore(score + level * 10);
