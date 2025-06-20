@@ -1,0 +1,164 @@
+.results-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(224,247,250,0.3) 0%, rgba(255,255,255,1) 100%);
+  font-family: 'Nunito Sans', sans-serif;
+  padding-bottom: 3rem;
+}
+
+.results-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.results-title {
+  font-size: 2.5rem;
+  color: #121212;
+  margin-bottom: 0.5rem;
+}
+
+.player-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.icon {
+  color: #facc15;
+}
+
+.score-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  color: #FF6B6B;
+}
+
+.score-icon {
+  background: linear-gradient(45deg, #facc15, #f59e0b);
+  padding: 0.75rem;
+  border-radius: 999px;
+}
+
+.star-icon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+}
+
+.history {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.history h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.attempt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  margin-bottom: 0.5rem;
+  color: #333;
+  flex-wrap: wrap;
+}
+
+.attempt.highlight {
+  background-color: #FFE5E5;
+  border-left: 4px solid #FF6B6B;
+}
+
+.attempt span {
+  flex: 1 1 50%;
+}
+
+.score {
+  font-weight: 600;
+  text-align: right;
+}
+
+.mini-star {
+  margin-left: 0.4rem;
+  color: #facc15;
+  width: 1rem;
+  height: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: #FF6B6B;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.btn-primary:hover {
+  background-color: #FF5252;
+}
+
+.btn-secondary {
+  background-color: #e5e5e5;
+  color: #121212;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.motivation {
+  font-style: italic;
+  color: #555;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Optional: style for empty state */
+.history p {
+  font-style: italic;
+  color: #999;
+  padding: 0.5rem;
+  text-align: center;
+}

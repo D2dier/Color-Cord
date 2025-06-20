@@ -1,0 +1,199 @@
+/* Games.css */
+
+.games-screen {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #bfdbfe, #ffffff);
+  font-family: sans-serif;
+  color: #1f2937;
+}
+
+.games-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 48px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 32px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.level {
+  color: #3b82f6;
+}
+
+.score {
+  color: #9333ea;
+  font-weight: 600;
+}
+
+.instructions {
+  font-size: 1.25rem;
+  margin-bottom: 32px;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.color-button {
+  width: 144px;
+  height: 144px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.color-button:hover {
+  transform: scale(1.05);
+}
+
+.color-button:disabled {
+  cursor: not-allowed;
+}
+
+/* .red { background-color: #ef4444; }
+.red.active { background-color: #fca5a5; }
+
+.green { background-color: #22c55e; }
+.green.active { background-color: #86efac; }
+
+.yellow { background-color: #facc15; }
+.yellow.active { background-color: #fde68a; }
+
+.blue { background-color: #3b82f6; }
+.blue.active { background-color: #93c5fd; } */
+
+.red {
+  background-color: var(--pad-red);
+}
+.red.active {
+  background-color: var(--pad-red-active);
+}
+
+.green {
+  background-color: var(--pad-green);
+}
+.green.active {
+  background-color: var(--pad-green-active);
+}
+
+.yellow {
+  background-color: var(--pad-yellow);
+}
+.yellow.active {
+  background-color: var(--pad-yellow-active);
+}
+
+.blue {
+  background-color: var(--pad-blue);
+}
+.blue.active {
+  background-color: var(--pad-blue-active);
+}
+
+
+.control-buttons {
+  display: flex;
+  gap: 24px;
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  border: none;
+  font-weight: 500;
+  color: #1f2937;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.control-button:hover {
+  background-color: #e5e7eb;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 32px;
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 320px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal h2 {
+  font-size: 1.875rem;
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.modal .final-score {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal .button-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Thèmes dynamiques */
+
+.theme-blue {
+  --pad-red: #ef4444;
+  --pad-red-active: #fca5a5;
+  --pad-green: #22c55e;
+  --pad-green-active: #86efac;
+  --pad-yellow: #facc15;
+  --pad-yellow-active: #fde68a;
+  --pad-blue: #3b82f6;
+  --pad-blue-active: #93c5fd;
+}
+
+.theme-pink {
+  --pad-red: #ec4899;
+  --pad-red-active: #f9a8d4;
+  --pad-green: #f472b6;
+  --pad-green-active: #fbcfe8;
+  --pad-yellow: #fb7185;
+  --pad-yellow-active: #fecdd3;
+  --pad-blue: #e879f9;
+  --pad-blue-active: #f0abfc;
+}
+
+.theme-dark {
+  --pad-red: #b91c1c;
+  --pad-red-active: #f87171;
+  --pad-green: #15803d;
+  --pad-green-active: #4ade80;
+  --pad-yellow: #ca8a04;
+  --pad-yellow-active: #facc15;
+  --pad-blue: #1d4ed8;
+  --pad-blue-active: #60a5fa;
+}

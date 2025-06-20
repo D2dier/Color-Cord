@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+.theme-blue {
+  --primary-bg: #e0f7fa;
+  --primary-text: #007B9F;
+  --accent-color: #26C6DA;
+  --pad-red: #f44336;
+  --pad-green: #4caf50;
+  --pad-yellow: #ffeb3b;
+  --pad-blue: #2196f3;
+}
+
+.theme-pink {
+  --primary-bg: #ffe5ec;
+  --primary-text: #a83264;
+  --accent-color: #FF6B6B;
+  --pad-red: #e91e63;
+  --pad-green: #ff80ab;
+  --pad-yellow: #f8bbd0;
+  --pad-blue: #f06292;
+}
+
+.theme-dark {
+  --primary-bg: #000000;
+  --primary-text: #000000;
+  --accent-color: #888;
+  --pad-red: #d32f2f;
+  --pad-green: #388e3c;
+  --pad-yellow: #fbc02d;
+  --pad-blue: #1976d2;
+}
+
+body.theme-blue,
+body.theme-pink,
+body.theme-dark {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+
+
+
