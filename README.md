@@ -1,12 +1,12 @@
 
 ---
 
-## 📁 `color-cord` — Assignment 3: Memory Game
+## 📁 `color-cord` — Memory Game
 
 ```markdown
 # Color Cord
 
-**Color Cord** is a Simon Says-style memory game built using React for Assignment 3 of SEG3525. It enhances memory recall through a sequence-based color game with sound, difficulty levels, and customization options.
+**Color Cord** is a Simon Says-style memory game built using React. It enhances memory recall through a sequence-based color game with sound, difficulty levels, and customization options.
 
 ## 🎮 Features
 
